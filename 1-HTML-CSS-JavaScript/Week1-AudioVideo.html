@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Audio and Video in HTML</title>
+   <meta name="author" content="Micah Mount">
+   <!--The style below is copied from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_fullscreen_video-->
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+   <style>
+         * {
+           box-sizing: border-box;
+         }
+         
+         body {
+           margin: 0;
+           font-family: 'Open Sans', sans-serif;
+           font-size: 17px;
+         }
+         
+         #myVideo {
+           position: fixed;
+           right: 0;
+           bottom: 0;
+           min-width: 100%; 
+           min-height: 100%;
+         }
+         
+         .content {
+           position: fixed;
+           bottom: 0;
+           background: rgba(0, 0, 0, 0.5);
+           color: #f1f1f1;
+           width: 100%;
+           padding: 20px;
+         }
+         
+         #myBtn {
+           width: 200px;
+           font-size: 18px;
+           padding: 10px;
+           border: none;
+           background: #000;
+           color: #fff;
+           cursor: pointer;
+         }
+         
+         #myBtn:hover {
+           background: #ddd;
+           color: black;
+         }
+         </style>
+</head>
+<body>
+      <video autoplay muted loop width="100%">
+         <source src="https://www.videvo.net/videvo_files/converted/2017_06/videos/160409_A_025.mp484844.mp4" type="video/mp4">
+         Sorry, your browser doesn't support HTML5 video. Here is a <a href="https://www.videvo.net/videvo_files/converted/2017_06/videos/160409_A_025.mp484844.mp4">link to the video</a> instead.
+      </video>
+   <div class="content">
+   <h1 style="font-weight: bold">Including Audio and Video in HTML</h1>
+   <h2>Audio: Baby cooing</h2>
+      <audio controls autoplay loop src="https://d1490khl9dq1ow.cloudfront.net/sfx/mp3preview/baby-cooing-2_MkO82hVu.mp3"></audio>
+   <h2>Background Video: Mother Holding Baby's Hand</h2>
+   <p>I've been really currious about how to setup video as a full-width background, espeically for the "hero" section of a site so that the site nav floats over the top of the video. I did a little digging and it's actually pretty eaasy with a little good 'ol CSS!</p>
+   </div>   
+</body>
+</html>

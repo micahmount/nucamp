@@ -1,0 +1,29 @@
+Question #1: Level of expertise in HTML and CSS: Beginner
+
+Question #2: How do you turn the text below "Welcome to my page!" purple?
+Answer: In the styles.css file, I'd add the following CSS rule-set:
+
+#welcome {
+    color: purple;
+}
+
+And then adjust the <h1> element to include the id selector I created:
+"<h1 id="welcome">Welcome to My Web Page!</h1>"
+
+Question #3: How would you describe your level of expertise in JavaScript... Have you learned algorithms in the past?
+Answer: Beginner, nope, I've not learned algorithms yet.
+
+Question #4: What's wrong with this JavaScript code? How would you fix it?
+Answer: I really haven't the foggiest about javascript yet, but I found a very similar example here:
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_while
+
+Based on that, I'd say that "i=11;" should be designated as a variable (I don't know if you have to have the "var" or if JS is smart enough to do this implicitly) with by stating "var i = 11;".
+But more importantly, if I understand correctly, the example provided would go to infinity as "i" is already greater than 10 and there's nothing in the function to make it stop, so depending on what the function needs to do, I would edit it so that it stops. The easiest way to do this is to have it count from 0-10, as in the example link provided, rather than 10-infinity.
+So I would change the function to count 1-10 like this:
+
+i = 1;
+
+while (i < 10) {
+    text += "The number is " + i;
+    i++;
+}

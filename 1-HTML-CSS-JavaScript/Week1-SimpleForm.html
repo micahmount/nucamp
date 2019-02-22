@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <form action="https://learn.nucamp.co/show_everything.php" method="POST">
+            <p>Please ener your information below.</p>
+            <fieldset>
+                <legend>Personal Information</legend>
+                <input type="text" name="firstName" placeholder="First Name" required> <br/><br/>
+                <input type="text" name="lastName" placeholder="Last Name" required> <br/><br/>
+                <input type="email" name="email" placeholder="email address" required> <br/><br/>
+                <textarea row="5" cols="60" name="address" placeholder="What is your address?" required></textarea>
+            </fieldset> <br/>
+            <fieldset>
+                <legend>Please let us know what feedback you would like us to consider.</legend>
+                <textarea rows="3" cols="60" name="feedback" placeholder="Pleaes enter your text here."></textarea>
+            </fieldset><br/>
+            <input type="submit" value="send">
+        </form>
+    </body>
+</html>
