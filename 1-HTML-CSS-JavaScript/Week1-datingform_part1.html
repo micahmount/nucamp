@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h1>Please Enter Your Details For Our Dating Website!</h1>
+        <form action="https://learn.nucamp.co/show_everything.php" method="POST" enctype="multipart/form­data">
+            <fieldset>
+                <legend>Your Face</legend>
+                <label for="avatar">Your Image</label>
+                <input required type="file" name="avatar" id="avatar"><br/>
+                <label for="preview">Image Preview:</label>
+                <img id="preview"><img>
+            </fieldset>
+            <fieldset>
+                <legend>Your General Details</legend>
+                <label for="name">Name</label>
+                <input required type="text" name="name" id="name"><br/>
+                Gender:
+                <input required type="radio" name="gender" id="male" value="male">
+                <label for="male">male</label>
+                <input type="radio" name="gender" id="female" value="female">
+                <label for="female">female</label><br/>
+                <label for="age">Age</label>
+                <input required type="number" name="age" id="age"><br/>
+                <label for="dob">Date of birth:</label>
+                <input required type="date" name="dob" id="dob"><br/>
+                <lable for="color">Favorite color:</lable>
+                <input type="color" name="color" id="color"><br/>
+                <label for="country">Which country:</label>
+                <select>
+                    <option value=""></option>
+                    <option value="Japan">Japan</option>
+                    <option value="Australia">Australia</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="Uruguay">Uruguay</option>
+                    <option value="Brazil">Brazil</option>
+                </select>
+            </fieldset>
+            <fieldset>
+                <legend>Your Indicators</legend>
+                <label>Height:</label>
+                <span>Short</span>
+                <input type="range" min="0" max="100">
+                <span>Tall</span><br/>
+                <label>Salary:</label>
+                <span>Poor</span>
+                <input type="range" min="0" max="100">
+                <span>Rich</span>
+            </fieldset>
+            <fieldset>
+                <legend>Your Contact Information</legend>
+                <label for="email">Email:</label>
+                <input type="email" required name="email" id="email"><br>
+                <label for="mobile">Phone:</label><input type="tel" name="mobile" id="mobile"><br>
+                <label for="address">Address:</label>
+                <textarea rows="3" cols="20"></textarea><br>
+                Method to contact you:
+                <input type="checkbox" name="contact" value="call" id="call"><label for="call">Call</label>
+                <input type="checkbox" name="contact" value="text" id="text"><label for="text">Text</label>
+                <input type="checkbox" name="contact" value="email" id="email-contact"><label for="email-contact">Email</label>
+            </fieldset><br>
+            <input type="submit" value="send">
+        </form>
+    </body>
+</html>
