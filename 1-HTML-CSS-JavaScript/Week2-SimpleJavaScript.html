@@ -2,13 +2,20 @@
 <html>
     <head>
         <title>Example of prompt() </title>
-        <script>
+        <!-- <script>
             var user_name;
-            user_name=prompt("What is your name?");
-            alert("Welcome to my page " + user_name + "!");
+            var email;
+            user_name=prompt("Hi There! What's your name?");
+            email=prompt("Excellent! and what is your email address, " + user_name + "?");
+            document.write("<p>Great, thanks for the info!<br>Let's get your new account started " + user_name + ".<br>We'll use " + user_name + " for your username and " + email + " for your email address.</p>");
+        </script> -->
+        <script>
+        var user_name;
+        var email;
+        user_name=prompt("Hi there! What's your name?");
+        alert("Welcome to my page " + user_name + "!");
+        email=prompt("Excellent! and what is your email address " + user_name + "?");
+        alert("Great! Thanks for the info " + user_name + "!\nWe'll use " + user_name + " for your username, and " + email + " for your email address!");
         </script>
     </head>
-    <body>
-    
-    </body>
 </html>
