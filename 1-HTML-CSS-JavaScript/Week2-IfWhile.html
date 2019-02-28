@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+    <title> Example of a do .. while()</title>
+    <script>
+    var response, finished;
+    finished=false;
+    alert("I'd like to code in JavaScript all night!");
+
+    do {
+        response=prompt("Do you agree?");
+        if (response.indexOf("y")==0)
+            finished=true;
+    } while (!finished);
+    </script>
+</head>
+</html>
