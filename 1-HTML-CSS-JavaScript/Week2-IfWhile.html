@@ -4,14 +4,14 @@
     <title> Example of a do .. while()</title>
     <script>
     var response, finished;
-    finished=false;
+    finished=true;
     alert("I'd like to code in JavaScript all night!");
 
-    do {
+    while(finished) {
         response=prompt("Do you agree?");
-        if (response.indexOf("y")==0)
-            finished=true;
-    } while (!finished);
+        if (response.indexOf("n")==0)
+            finished=false;
+    }
     </script>
 </head>
 </html>
