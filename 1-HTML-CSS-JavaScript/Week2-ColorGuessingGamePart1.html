@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Color Guessing Game!</title>
+        <script>
+        colors = ["Azure", "Coral", "Cyan", "DarkOliveGreen", "GreenYellow"]
+        var target;
+        var colors;
+        var guess_input;
+        var finished = false;
+        var guesses = 0;
+        
+        console.log ("I'm here!");
+
+        function do_game() {
+            var random_number = Math.random() * colors.length;
+            var random_number_integer = Math.floor(random_number);
+            console.log("The random number is: " + random_number_integer + ".");
+            
+            target = colors[random_number_integer];
+            console.log("The random color is: " + target + ".");
+
+            while(!finished){
+                guess_input = prompt("I'm thinking of one of these colors: " + colors.join(", ") + " guess which one!");
+                guesses++;
+                console.log("You've taken " + guesses + " guesses.");
+                finished = guess_input === target;
+            }
+        }
+        </script>
+    </head>
+    <body onload="do_game()">
+        
+    </body>
+</html>
