@@ -4,15 +4,18 @@
         <h2> JavaScript Arrays</h2>
         <script>
             var fruits, text, flen, i;
-            fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits = ["Cats", "Dogs", "Chickens", "Goats"];
             flen = fruits.length;
-            text = "<ul>";
+            text = "<ol>";
             for (i = 0; i < flen; i++){
                 text += "<li>" + fruits[i] + "</li>";
             }
-            text += "</ul>";
+            text += "</ol>";
                 alert("This is the resulting Array using an HTML list: " + text);
-            
         </script>
+        <p>This is the updated furits array:</p>
+        <p id="text"></p>
+        <p>those are some WEIRD fruits!</p>
+        <script>document.getElementById("text").innerHTML = text;</script>
     </body>
 </html>
