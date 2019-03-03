@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Color Guessing Game!</title>
+        <script>
+            var colors=["azure", "coral", "cyan", "fuchsia", "olive"];
+            var target;
+            var guess_input;
+            var finished = false;
+            var guesses = 0;
+
+            function do_game() {
+                colors.sort();
+                console.log(colors);
+                var random_number = Math.random() * colors.length;
+                var random_number_integer = Math.floor(random_number);
+                
+                target = colors[random_number_integer];
+                console.log("The color is: " + target + ".")
+
+                while(!finished) {
+                    guess_input = prompt("I'm thinking of one of these colors: \n\n" + colors.join(", ") + "\n\n Can you guess which one?!");
+                    guesses++;
+                    guess_input.toLowerCase();
+                    finished = check_guess();
+                }
+                document.body.style.background = target;
+                setTimeout(function() { alert("You got it! The color was: " + target + "!\n\n It took you " + guesses + " guesses to get the color!");}, 10);
+            }
+
+            function check_guess() {
+                if(colors.indexOf(guess_input) == -1){
+                    alert("You didn't pick one of the options; please enter a guess from the following: " + colors.join(", ") + ".");
+                    return false;
+                }
+
+                if (guess_input > target) {
+                    alert("Your guess " + guess_input + " is alphabetically higher than the corect color.");
+                    return false;
+                }
+                if (guess_input < target) {
+                    alert("Your guess " + guess_input + " is alphabetically lower then the correct color.");
+                    return false;
+                }
+                return true; 
+            }
+        </script>
+    </head>
+    <body onload="do_game()">
+        
+    </body>
+</html>
