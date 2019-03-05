@@ -2,13 +2,22 @@
 <html>
     <head>
         <script>
-            var year, great_years = [];
-            for (year=2014; year <=2016; year++) {
+            var year, great_years = [], list, i=0;
+            list = "<ul>";
+            for (year=2014; year <=2018; year++) {
                 correct=confirm(year + " was great for you?")
                 if (!correct) continue;
                     great_years.push(year)
+                    list += "<li>" + great_years[i] + "</li>";
+                    i++;
             }
-            alert("Your great years were: " + great_years + ".");
+            list += "</ul>";
+            alert("Your great years were: " + list + ".");
         </script>
     </head>
+    <body>
+        <p>This is the updated list of great years:</p>
+        <p id="list"></p>
+        <script>document.getElementById("list").innerHTML = list;</script>
+    </body>
 </html>
