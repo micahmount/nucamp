@@ -2,20 +2,23 @@
 <html>
     <head>
         <script>
-            function bigImg(x) {
-                x.style.height="64px";
-                x.style.width="64px";
+            function singImg(x) { //I don't understand why the "x" variable is necessary to make this work--I don't see how it affects the img in the body.
+                x.style.height="96px";
+                x.style.width="96px";
+                document.getElementById("myImg").src="singingSmiley.png";
+
             }
             
             function normalImg(x) {
                 x.style.height="32px";
                 x.style.width="32px";
+                document.getElementById("myImg").src="smiley.gif";
             }
         </script>
     </head>
     <body>
-        <img onmouseover="bigImg(this)" onmouseout="normalImg(this)" border="0" src="smiley.gif" alt="Smiley" width="32" height="32">
-        <p>The function bigImg() is triggered when the user moves the mouse pointer over the image.</p>
+        <img onmouseover="singImg(this)" onmouseout="normalImg(this)" id="myImg" border="0" src="smiley.gif" alt="Smiley" width="32" height="32">
+        <p>The function singImg() is triggered when the user moves the mouse pointer over the image.</p>
         <p>The fuction normalImg() is triggered when the mouse pointer is moved out of teh image.</p>
     </body>
 </html>
