@@ -2,6 +2,21 @@
 	"folders": [
 		{
 			"path": "1-HTML-CSS-JavaScript"
+		},
+		{
+			"path": "2-Bootstrap"
+		},
+		{
+			"path": "3-React"
+		},
+		{
+			"path": "4-React-Native"
+		},
+		{
+			"path": "5-NodeJS-Express-MongoDB"
+		},
+		{
+			"path": "git-test"
 		}
 	],
 	"settings": {}
