@@ -17,7 +17,12 @@
 		},
 		{
 			"path": "git-test"
+		},
+		{
+			"path": "JavaScript"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
 }
