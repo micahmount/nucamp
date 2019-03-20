@@ -26,4 +26,6 @@ if (x > y && x > z) {
     } else {
         alert("Awesome " + z + ", " + y + ", " + x + "!");
     }
+} else if (x == y && x == z) {
+    alert("Tricky! all of your entries were equal!");
 }
