@@ -43,6 +43,9 @@
                 <div class="col-12 col-sm align-self-center">
                     <img src="img/logo.png" class="img-fluid">
                 </div>
+                <div class="col-12 col-sm align-self-center">
+                    <a class="btn btn-warning" href="#reserveTable" role="button">Reserve Table</a>
+                </div>
             </div>
         </div>
     </header>
@@ -97,13 +100,14 @@
                 </div>
             </div>
         </div>
-        <div class="row row-content align-items-center">
-        <div class="col-12 col-sm-8 mx-auto">
+        <div class="row row-content">
+            <div class="col-sm"></div>
+        <div class="col-12 col-sm-8">
             <div class="card">
                 <h3 class="card-header bg-warning text-white">Reserve a Table</h3>
                 <div class="card-body">
-                    <form>
-                        <div class="form-group">
+                    <form id="reserveTable">
+                        <div class="form-group row">
                             <label class="col-12 col-md-3">Number of Guests</label>
                             <div class="form-check form-check-inline">
                                 <input type="radio" id="partySize1" name="partySize1" class="form-check-input">
@@ -154,6 +158,7 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm"></div>
     </div>
 
     <footer class="footer">
