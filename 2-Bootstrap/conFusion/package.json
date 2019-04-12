@@ -16,8 +16,14 @@
   "author": "Micah Mount",
   "license": "ISC",
   "devDependencies": {
+    "grunt": "^1.0.4",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass": "^2.1.0",
+    "jit-grunt": "^0.10.0",
     "lite-server": "^2.3.0",
-    "node-sass": "^4.7.2"
+    "node-sass": "^4.11.0",
+    "time-grunt": "^1.4.0"
   },
   "dependencies": {
     "bootstrap": "^4.0.0",
