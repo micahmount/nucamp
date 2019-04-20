@@ -1,37 +1,34 @@
-var userOne = {
-    email: 'ryu@ninjas.com',
-    name: 'Ryu',
-    login(){
-        console.log(this.email, ' has logged in');
-    },
-    logout(){
-        console.log(this.email, 'has logged out');
+class User {
+    constructor(name, email) {
+        this.name = name;
+        this.email = email;
+        console.log(`User ${this.name} created.`);
     }
-};
-
-var userTwo = {
-    email: 'yoshi@ninjas.com',
-    name: 'yoshi',
     login() {
-        console.log(this.email, 'has logged in');
-    },
-    logout() {
-        console.log(this.email, 'has logged out');
+        console.log(this.email, 'just logged in');
+        return this;
     }
-};
-
-var userThree = {
-    email: 'ari@ninjas.com',
-    name: 'ari',
-    login() {
-        console.log(this.email, 'has logged in');
-    },
     logout() {
-        console.log(this.email, 'has logged out');
+        console.log(this.email, 'just logged out.'); 
+
     }
-};
+}
 
-userOne.name = "arti";
+class Admin extends User {
+    deletUser(user){
+        user = users.filter(u => {
+            return u.email != user.email
+        })
+    }
+}
 
-userTwo.login();
-userThree.login();
+var userOne = new User ("Ryu", "ryu@ninjas.com");
+var userTwo = new User ("Yoshi", "yoshi@ninjas.com");
+var admin = new User ("Shaun", "shaun@ninjas.com");
+
+var users = [userOne, userTwo, admin];
+
+console.log(`User before`, users);
+
+admin.deletUser(userTwo);
+console.log("Users after", users); 
