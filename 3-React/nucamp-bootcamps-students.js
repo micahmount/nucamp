@@ -1,4 +1,4 @@
-const students = [
+const STUDENTS = [
     [
         "Neo",
         "neo@matrix.com",
@@ -30,3 +30,19 @@ const students = [
         "Bellingham",
     ]
 ]
+
+class Students {
+    constructor(name, email, community) {
+        this.name = name;
+        this.email = email;
+        this.comminity = community;
+    }
+}
+
+class Bootcamp {
+    constructor(name, level, students) {
+        this.name = name;
+        this.level = level;
+        this.students = (students === undefined) ? [] : students;
+    }
+}
