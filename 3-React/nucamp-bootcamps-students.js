@@ -31,7 +31,7 @@ const STUDENTS = [
     ]
 ]
 
-class Students {
+class Student {
     constructor(name, email, community) {
         this.name = name;
         this.email = email;
@@ -40,9 +40,20 @@ class Students {
 }
 
 class Bootcamp {
-    constructor(name, level, students) {
+    constructor(name, level, students=[]) {
         this.name = name;
         this.level = level;
-        this.students = (students === undefined) ? [] : students;
+        this.students = students;
     }
-}
+
+    registerStudent = (student) => {
+        if (this.students.filter(s => student.email === s.email).length > 0){
+            console.log(`${student.email} is already registered.`);
+        }
+        else {
+            this.students.push(student);
+            console.log(`${student.email} has been registered.`);
+        }
+        return this.students
+       }
+    }
