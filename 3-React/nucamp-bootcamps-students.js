@@ -54,6 +54,7 @@ class Bootcamp {
             this.students.push(student);
             console.log(`${student.email} has been registered.`);
         }
+        debugger;
         return this.students
        }
     }
