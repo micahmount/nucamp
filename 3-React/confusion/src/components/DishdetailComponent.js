@@ -178,7 +178,7 @@ const DishDetail = (props) => {
               <RenderDish dish={props.dish} />
               <RenderComments comments={props.comments} 
                 postComment={props.postComment}
-                dishID={props.dish.id}
+                dishId={props.dish.id}
               />
             </div>
           </div>

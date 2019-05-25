@@ -203,32 +203,12 @@
       "date": "2011-12-02T17:57:28.556094Z"
     },
     {
-      "rating": "5",
-      "author": "Micah Mount",
-      "comment": "Pizza is my favorite dish, and Uthappizza is my favorite pizza. Favorite, Favorite!",
-      "date": "2019-05-25T06:17:21.345Z",
-      "id": 20
-    },
-    {
-      "rating": "5",
-      "author": "Micah Mount",
-      "comment": "This is a comment.",
-      "date": "2019-05-25T06:19:30.567Z",
-      "id": 21
-    },
-    {
-      "rating": "5",
-      "author": "Micah",
-      "comment": "Test 2",
-      "date": "2019-05-25T06:29:15.986Z",
-      "id": 22
-    },
-    {
+      "dishId": 0,
       "rating": "5",
       "author": "Micah",
       "comment": "Pizza is my favorite dish, and Uthappizza is my favorite pizza. Favorite, Favorite!",
-      "date": "2019-05-25T06:46:05.577Z",
-      "id": 23
+      "date": "2019-05-25T18:03:17.256Z",
+      "id": 24
     }
   ],
   "promotions": [
