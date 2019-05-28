@@ -6,3 +6,4 @@ lecture_notes
 assets
 .vscode
 build
+3-React/json-server/public/*
