@@ -1,6 +1,33 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
+
+// COMMENTS
+export const addComment = (comment) => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment
+});
+
+export const addComments = (comment) => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment
+});
+
+export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+
+    const newComment = {
+        dishId: dishId,
+        rating: rating,
+        author: author,
+        comment: comment
+    };
+    newComment.date = new Date().toISOString();
+
+    setTimeout(() => {
+        dispatch(addComment(newComment));
+    }, 2000);
+}
+
 export const fetchComments = () => (dispatch) => {
     return fetch(baseUrl + 'comments')
         .then(response => {
@@ -26,11 +53,7 @@ export const commentsFailed = (errmess) => ({
     payload: errmess
 });
 
-export const addComments = (comments) => ({
-    type: ActionTypes.ADD_COMMENTS,
-    payload: comments
-});
-
+// DISHES
 export const fetchDishes = () => (dispatch) => {
 
     dispatch(dishesLoading());
@@ -68,6 +91,7 @@ export const addDishes = (dishes) => ({
     payload: dishes
 });
 
+// PROMOTIONS
 export const fetchPromos = () => (dispatch) => {
 
     dispatch(promosLoading());
@@ -105,6 +129,7 @@ export const addPromos = (promos) => ({
     payload: promos
 });
 
+// LEADERS
 export const fetchLeaders = () => (dispatch) => {
 
     dispatch(leadersLoading());
@@ -142,6 +167,7 @@ export const addLeaders = (leaders) => ({
     payload: leaders
 });
 
+// FAVORITES
 export const postFavorite = (dishId) => (dispatch) => {
 
     setTimeout(() => {
