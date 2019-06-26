@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, FlatList, Modal, Button, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, Text, ScrollView, FlatList, Modal, Button, StyleSheet, KeyboardAvoidingView, Alert, PanResponder } from 'react-native';
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { postFavorite, postComment } from '../redux/ActionCreators';
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = state => {
     return {
@@ -22,34 +23,79 @@ function RenderDish(props) {
 
     const dish = props.dish;
 
+    handleViewRef = ref => this.view = ref;
+
+    const recognizeDrag = ({dx}) => {
+        if ( dx < -200 )
+            return true;
+        else
+            return false;
+
+    }
+
+    const recognizeComment = ({dx}) => {
+        if (dx > 200)
+            return true;
+        else
+            return false;
+    }
+
+    const panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: (e, gestureState) => {
+            return true;
+        },
+        onPanResponderGrant: () => {this.view.rubberBand(100).then(endState => console.log(endState.finished ? 'finished' : 'cancelled'));},
+        onPanResponderEnd: (e, gestureState) => {
+            console.log("Pan responder end", gestureState);
+            if (recognizeDrag(gestureState))
+                Alert.alert(
+                    'Add Favorite',
+                    'Would you like to add ' + dish.name + ' to your favorites?',
+                    [
+                    {text: 'Cancel', onPress: () => console.log('Add to Favorites guesture alert Cancel Pressed'), style: 'cancel'},
+                    {text: 'OK', onPress: () => {props.favorite ? console.log('Already favorite') : props.onPress()}},
+                    ],
+                    {cancelable: false }
+                );
+            else if (recognizeComment(gestureState))
+                props.onShowModal();
+                    
+            return true;
+        }
+    })
+
     if (dish != null) {
         return (
-            <Card
-                featuredTitle={dish.name}
-                image={{ uri: baseUrl + dish.image }}>
-                <Text style={{ margin: 10 }}>
-                    {dish.description}
-                </Text>
-                <View style={styles.cardRow}>
-                    <Icon
-                        raised
-                        reverse
-                        name={props.favorite ? 'heart' : 'heart-o'}
-                        type='font-awesome'
-                        color='#f50'
-                        onPress={() => props.favorite ? console.log('Already favorite') : props.onPress()}
-                    />
-                    <Icon 
-                        style={styles.cardItem}
-                        raised
-                        reverse
-                        type='font-awesome'
-                        name='pencil'
-                        color='#512DA8'
-                        onPress={() => props.onShowModal()}
-                    />
-                </View>
-            </Card>
+            <Animatable.View animation="fadeInDown" duration={2000} delay={1000} 
+            ref={this.handleViewRef}
+            {...panResponder.panHandlers}>
+                <Card
+                    featuredTitle={dish.name}
+                    image={{ uri: baseUrl + dish.image }}>
+                    <Text style={{ margin: 10 }}>
+                        {dish.description}
+                    </Text>
+                    <View style={styles.cardRow}>
+                        <Icon
+                            raised
+                            reverse
+                            name={props.favorite ? 'heart' : 'heart-o'}
+                            type='font-awesome'
+                            color='#f50'
+                            onPress={() => props.favorite ? console.log('Already favorite') : props.onPress()}
+                        />
+                        <Icon 
+                            style={styles.cardItem}
+                            raised
+                            reverse
+                            type='font-awesome'
+                            name='pencil'
+                            color='#512DA8'
+                            onPress={() => props.onShowModal()}
+                        />
+                    </View>
+                </Card>
+            </Animatable.View>
         );
     }
     else {
@@ -76,13 +122,15 @@ function RenderComments(props) {
     };
 
     return (
-        <Card title='Comments' >
-            <FlatList
-                data={comments}
-                renderItem={renderCommentItem}
-                keyExtractor={item => item.id.toString()}
-            />
-        </Card>
+        <Animatable.View animation="fadeInUp" duration={2000} delay={1000}>
+            <Card title='Comments' >
+                <FlatList
+                    data={comments}
+                    renderItem={renderCommentItem}
+                    keyExtractor={item => item.id.toString()}
+                />
+            </Card>
+        </Animatable.View>
     );
 }
 
@@ -135,52 +183,50 @@ class DishDetail extends Component {
                     onPress={() => this.markFavorite(dishId)}
                     onShowModal={() => this.toggleModal()}
                 />
-                <RenderComments comments={this.props.comments.comments.filter((comment) => comment.dishId === dishId)} />
-                    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-                        <Modal 
-                            animationType={"slide"} 
-                            transparent={false} 
-                            visible={this.state.showModal} 
-                            onDismiss={() => this.toggleModal()}
-                            onRequestClose={() => this.toggleModal()}>
+                <RenderComments comments={this.props.comments.comments.filter((comment) => comment.dishId === dishId)} />    
+                    <Modal 
+                        animationType={"slide"} 
+                        transparent={false} 
+                        visible={this.state.showModal} 
+                        onDismiss={() => this.toggleModal()}
+                        onRequestClose={() => this.toggleModal()}>
+                        <View style={styles.modal}>
+                            <Rating
+                                fractions={0}
+                                startingValue={this.state.rating}
+                                showRating
+                                onFinishRating={(rating) => this.setState({ rating: rating })}
+                                style={{ paddingVertical: 10 }}
+                            />
+
+                            <Input
+                                leftIcon={{ type: 'font-awesome', name: 'user-o' }}
+                                placeholder=' Author'
+                                onChangeText={(author) => this.setState({ author: author })}
+                            />
+                            <Input
+                                leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
+                                placeholder=' Comment'
+                                onChangeText={(comment) => this.setState({ comment: comment })}
+                            />
                             <View style={styles.modal}>
-                                <Rating
-                                    fractions={0}
-                                    startingValue={this.state.rating}
-                                    showRating
-                                    onFinishRating={(rating) => this.setState({ rating: rating })}
-                                    style={{ paddingVertical: 10 }}
+                                <Button
+                                    onPress={() => { this.handleComment(dishId); this.resetForm(); }}
+                                    title="Submit"
+                                    color="#512DA8"
+                                    
                                 />
-
-                                <Input
-                                    leftIcon={{ type: 'font-awesome', name: 'user-o' }}
-                                    placeholder=' Author'
-                                    onChangeText={(author) => this.setState({ author: author })}
-                                />
-                                <Input
-                                    leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
-                                    placeholder=' Comment'
-                                    onChangeText={(comment) => this.setState({ comment: comment })}
-                                />
-                                <View style={styles.modal}>
-                                    <Button
-                                        onPress={() => { this.handleComment(dishId); this.resetForm(); }}
-                                        title="Submit"
-                                        color="#512DA8"
-                                        
-                                    />
-                                </View>
-                                <View style={{marginTop: 0 , marginLeft: 20, marginRight: 20}}>
-                                    <Button
-                                        onPress={() => { this.toggleModal(); this.resetForm(); }}
-                                        color="#808080"
-                                        title="Cancel"
-                                    />
-                                </View>
                             </View>
+                            <View style={{marginTop: 0 , marginLeft: 20, marginRight: 20}}>
+                                <Button
+                                    onPress={() => { this.toggleModal(); this.resetForm(); }}
+                                    color="#808080"
+                                    title="Cancel"
+                                />
+                            </View>
+                        </View>
 
-                        </Modal>
-                    </KeyboardAvoidingView>    
+                    </Modal>    
             </ScrollView>
         );
     }
