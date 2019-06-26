@@ -201,22 +201,6 @@
       "comment": "It's your birthday, we're gonna party!",
       "author": "25 Cent",
       "date": "2011-12-02T17:57:28.556094Z"
-    },
-    {
-      "dishId": 0,
-      "rating": "5",
-      "author": "Micah",
-      "comment": "Pizza is my favorite dish, and Uthappizza is my favorite pizza. Favorite, Favorite!",
-      "date": "2019-05-25T18:03:17.256Z",
-      "id": 24
-    },
-    {
-      "dishId": 0,
-      "rating": "4",
-      "author": "Micah Mount",
-      "comment": "Yay--server side pizza is delicious!",
-      "date": "2019-05-25T18:39:08.430Z",
-      "id": 25
     }
   ],
   "promotions": [
