@@ -104,6 +104,7 @@ function RenderDish(props) {
 }
 
 function RenderComments(props) {
+    
     const comments = props.comments;
 
     const renderCommentItem = ({ item, index }) => {
