@@ -9,13 +9,13 @@ import { favorites } from './favorites';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/es/storage';
 
-export const ConfigureStore = () => {
+const config = {
+    key: 'root',
+    storage,
+    debug: true
+};
 
-    const config = {
-        key: 'root',
-        storage,
-        debug: true
-    };
+export const ConfigureStore = () => {
 
     const store = createStore(
         persistCombineReducers(config, {
@@ -28,7 +28,8 @@ export const ConfigureStore = () => {
         applyMiddleware(thunk, logger)
     );
 
-    const persistor = persistStore(store)
+    const persistor = persistStore(store);
+        persistor.purge();
 
     return { persistor, store };
 }
