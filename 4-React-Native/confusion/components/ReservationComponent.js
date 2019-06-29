@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, Picker, Switch, Button, Modal, Alert } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Switch, Button, Alert, TextInput } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import * as Animatable from 'react-native-animatable';
-import { Permissions, Notifications } from 'expo';
+import { Permissions, Notifications, Calendar } from 'expo';
 
 
 
@@ -12,10 +12,9 @@ class Reservation extends Component {
         super(props);
 
         this.state = {
-            guests: 1,
+            guests: '1',
             smoking: false,
-            date: '',
-            showModal: false
+            date: ''
         }
     }
 
@@ -36,7 +35,12 @@ class Reservation extends Component {
             },
             {
                 text: 'OK',
-                onPress: () => { this.presentLocalNotification(this.state.date); console.log('Reservation Confirmed'); this.resetForm(); }
+                onPress: () => { 
+                    this.presentLocalNotification(this.state.date); 
+                    this.addReservationToCalendar(this.state.date); 
+                    console.log('Reservation Confirmed'); 
+                    this.resetForm(); 
+                }
             }
             ],
             { cancelable: false }
@@ -45,10 +49,9 @@ class Reservation extends Component {
 
     resetForm() {
         this.setState({
-            guests: 1,
+            guests: '1',
             smoking: false,
-            date: '',
-            showModal: false
+            date: ''
         });
     }
 
@@ -58,6 +61,17 @@ class Reservation extends Component {
             permission = await Permissions.askAsync(Permissions.USER_FACING_NOTIFICATIONS);
             if (permission.status !== 'granted') {
                 Alert.alert('Permission not granted to show notifications');
+            }
+        }
+        return permission;
+    }
+
+    async obtainCalendarPermission() {
+        let permission = await Permissions.getAsync(Permissions.CALENDAR);
+        if (permission.status !== 'granted') {
+            permission = await Permissions.askAsync(Permissions.CALENDAR);
+            if (permission.status !== 'granted') {
+                Alert.alert('PermissionS not granted to use the calendar');
             }
         }
         return permission;
@@ -80,23 +94,36 @@ class Reservation extends Component {
         });
     }
 
+    async addReservationToCalendar(date) {
+        await this.obtainCalendarPermission();
+        const eventId =     
+        Calendar.createEventAsync(
+            
+                Calendar.DEFAULT,
+            {
+                title: 'Con Fusion Table Reservation',
+                startDate: new Date(Date.parse(date)),
+                endDate: new Date(Date.parse(date) + 7200000),
+                timeZone: 'Asia/Hong_Kong',
+                location: '121, Clear Water Bay Road, Clear Water Bay, Kowloon, Hong Kong'
+            }
+        );
+        console.log('Calendar event Id: ', eventId);
+    }
+
     render() {
         return (
             <ScrollView>
                 <Animatable.View animation="zoomIn" duration={2000}>
                     <View style={styles.formRow}>
                         <Text style={styles.formLabel}>Number of Guests</Text>
-                        <Picker
-                            style={styles.formItem}
-                            selectedValue={this.state.guests}
-                            onValueChange={(itemValue, itemIndex) => this.setState({ guests: itemValue })}>
-                            <Picker.Item label="1" value="1" />
-                            <Picker.Item label="2" value="2" />
-                            <Picker.Item label="3" value="3" />
-                            <Picker.Item label="4" value="4" />
-                            <Picker.Item label="5" value="5" />
-                            <Picker.Item label="6" value="6" />
-                        </Picker>
+                        <TextInput
+                            style={{borderColor: 'gray', borderWidth: 1, width: 150, textAlign: 'center'}}
+                            value={this.state.guests}
+                            keyboardType={'numeric'}
+                            placeholder="1-10"
+                            onChangeText = {(guests) => this.setState({guests})}
+                        />
                     </View>
                     <View style={styles.formRow}>
                         <Text style={styles.formLabel}>Non-Smoking/Smoking?</Text>
@@ -163,6 +190,10 @@ const styles = StyleSheet.create({
     },
     formItem: {
         flex: 1
+    },
+    formBox: {
+        borderColor: 'gray',
+        borderWidth: 1,        
     },
     modal: {
         justifyContent: 'center',

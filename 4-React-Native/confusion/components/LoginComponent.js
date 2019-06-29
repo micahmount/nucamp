@@ -95,7 +95,7 @@ class LoginTab extends Component {
                     <Button
                         onPress={() => this.props.navigation.navigate('Register')}
                         title="Register"
-                        clear
+                        type='clear'
                         icon={
                             <Icon
                                 name='user-plus'
@@ -148,6 +148,22 @@ class RegisterTab extends Component {
 
     }
 
+    getImageFromGallery = async () => {
+        const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+        if (cameraRollPermission.status === 'granted') {
+            let selectImage = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+                aspect: [4, 3],
+            });
+            if (!selectImage.cancelled) {
+                console.log(selectImage);
+                this.processImage(selectImage.uri);
+            }
+        }
+
+    }
+
     processImage = async (imageUri) => {
         let processedImage = await ImageManipulator.manipulateAsync(
             imageUri,
@@ -193,6 +209,10 @@ class RegisterTab extends Component {
                         <Button
                             title="Camera"
                             onPress={this.getImageFromCamera}
+                        />
+                        <Button
+                            title="Gallery"
+                            onPress={this.getImageFromGallery}
                         />
                     </View>    
                     <Input
@@ -266,7 +286,8 @@ const styles = StyleSheet.create({
     imageContainer: {
         flex: 1,
         flexDirection: 'row',
-        margin: 20
+        margin: 20,
+        justifyContent: 'space-around'
     },
     image: {
         margin: 10,
