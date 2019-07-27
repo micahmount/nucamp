@@ -33,7 +33,6 @@ router.post('/signup', (req, res, next) => {
 
 /* POST Login Existing Users */
 router.post('/login', passport.authenticate('local'), (req, res) => {
-
   var token = authenticate.getToken({ _id: req.user._id });
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
@@ -42,7 +41,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 
 
 /* GET Logout Existing Users */
-router.get('/logout', (req, res) => {
+router.get('/logout', (req, res, next) => {
   if (req.session) {
     req.session.destroy();
     res.clearCookie('conFusion session-id');
