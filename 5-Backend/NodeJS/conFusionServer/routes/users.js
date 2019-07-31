@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 var User = require('../models/user');
 var passport = require('passport');
 var authenticate = require('../authenticate');
+const cors = require('./cors');
 
 
 var router = express.Router();
@@ -10,7 +11,8 @@ router.use(bodyParser.json());
 
 /* GET users listing. */
 router.route('/')
-  .get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .get(cors.cors, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     User.find({})
       .then((user) => {
         res.statusCode = 200;
@@ -22,7 +24,8 @@ router.route('/')
 
 /* POST Signup New Users */
 router.route('/signup')
-  .post((req, res, next) => {
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .post(cors.corsWithOptions, (req, res, next) => {
     User.register(new User({ username: req.body.username, firstname: req.body.firstname, lastname: req.body.lastname }), req.body.password, (err, user) => {
       if (err) {
         res.statusCode = 500;
@@ -41,7 +44,8 @@ router.route('/signup')
 
 /* POST Login Existing Users */
 router.route('/login')
-  .post(passport.authenticate('local'), (req, res) => {
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .post(cors.corsWithOptions, passport.authenticate('local'), (req, res) => {
     var token = authenticate.getToken({ _id: req.user._id });
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
@@ -51,7 +55,8 @@ router.route('/login')
 
 /* GET Logout Existing Users */
 router.route('/logout')
-  .get((req, res, next) => {
+  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+  .get(cors.cors, (req, res, next) => {
     if (req.session) {
       req.session.destroy();
       res.clearCookie('conFusion session-id');
