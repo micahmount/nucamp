@@ -181,26 +181,27 @@ dishRouter.route('/:dishId/comments/:commentId')
     .put(authenticate.verifyUser, (req, res, next) => {
         Dishes.findById(req.params.dishId)
             .then((dish) => {
-                if (req.user.id === dish.comments.id(req.params.commentId).author) {
-                    if (dish != null && dish.comments.id(req.params.commentId) != null) {
-                        if (req.body.rating) {
-                            dish.comments.id(req.params.commentId).rating = req.body.rating;
-                        }
-                        if (req.body.comment) {
-                            dish.comments.id(req.params.commentId).comment = req.body.comment;
-                        }
-                        dish.save()
-                            .then((dish) => {
-                                res.statusCode = 200;
-                                res.setHeader('Content-Type', 'application/json');
-                                res.json(dish);
-                            }, (err) => next(err));
+                if (req.user.id === req.params.commentId.author) (
+                    next()
+                )
+                else {
+                    err = new Error('You are not authorized to perform this operation, because you are not the author!');
+                    err.status = 403;
+                    next(err);
+                }
+                if (dish != null && dish.comments.id(req.params.commentId) != null) {
+                    if (req.body.rating) {
+                        dish.comments.id(req.params.commentId).rating = req.body.rating;
                     }
-                    else {
-                        err = new Error('You are not authorized to perform this operation, because you are not the author!');
-                        err.status = 403;
-                        next(err);
+                    if (req.body.comment) {
+                        dish.comments.id(req.params.commentId).comment = req.body.comment;
                     }
+                    dish.save()
+                        .then((dish) => {
+                            res.statusCode = 200;
+                            res.setHeader('Content-Type', 'application/json');
+                            res.json(dish);
+                        }, (err) => next(err));
                 }
                 else if (dish == null) {
                     err = new Error('Dish ' + req.params.dishId + ' not found');
