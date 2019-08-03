@@ -18,6 +18,7 @@
   ],
   "settings": {
     "git.ignoreLimitWarning": true,
-    "material-icon-theme.activeIconPack": "react"
+    "material-icon-theme.activeIconPack": "react",
+    "workbench.colorCustomizations": {}
   }
 }
